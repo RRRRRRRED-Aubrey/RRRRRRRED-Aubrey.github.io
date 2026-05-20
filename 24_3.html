@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>未來職業與科技大冒險 🚀 | 給國小生的知識大補帖</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Noto Sans TC & Nunito Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Nunito:wght@700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                        heading: ['"Nunito"', '"Noto Sans TC"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#FF6B6B', // 活潑的紅色
+                        secondary: '#4ECDC4', // 明亮的藍綠色
+                        accent: '#FFE66D', // 溫暖的黃色
+                        dark: '#2C3E50', // 深藍色文字
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #F7F9FC;
+            color: #2C3E50;
+        }
+        .bounce-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .transition-all {
+            transition: all 0.3s ease-in-out;
+        }
+        .card-bg {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);
+        }
+        /* 隱藏捲軸但可滾動 */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="antialiased font-sans">
+
+    <!-- 頂部導覽與搜尋列 -->
+    <nav class="bg-primary text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center py-4 gap-4">
+                <div class="flex items-center gap-2 text-2xl font-heading font-black tracking-wide">
+                    <i class="fa-solid fa-rocket animate-bounce"></i>
+                    <span>未來大冒險</span>
+                </div>
+                
+                <!-- 搜尋框 -->
+                <div class="relative w-full md:w-96">
+                    <input type="text" id="searchInput" placeholder="搜尋程式、環保或職業..." 
+                           class="w-full bg-white/20 text-white placeholder-white/80 border-2 border-white/30 rounded-full py-2 px-5 pl-12 focus:outline-none focus:bg-white focus:text-dark focus:placeholder-gray-400 transition-all font-bold">
+                    <i class="fa-solid fa-search absolute left-4 top-3.5 text-white/80" id="searchIcon"></i>
+                </div>
+                
+                <div class="hidden md:flex gap-6 font-bold text-lg">
+                    <a href="#resources" class="hover:text-accent transition-all">📚 資源寶庫</a>
+                    <a href="#faq" class="hover:text-accent transition-all">❓ 快問快答</a>
+                    <a href="#quiz" class="hover:text-accent transition-all">🎮 知識挑戰</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄橫幅 (Hero Section) -->
+    <header class="bg-dark text-white py-12 md:py-20 relative overflow-hidden">
+        <!-- 裝飾背景 -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+            <i class="fa-solid fa-code absolute top-10 left-10 text-6xl transform rotate-12"></i>
+            <i class="fa-solid fa-leaf absolute bottom-10 right-10 text-8xl transform -rotate-12"></i>
+            <i class="fa-solid fa-plane absolute top-20 right-20 text-6xl"></i>
+            <i class="fa-solid fa-lightbulb absolute bottom-20 left-20 text-7xl"></i>
+        </div>
+        
+        <div class="max-w-6xl mx-auto px-4 text-center relative z-10">
+            <span class="bg-accent text-dark px-4 py-1 rounded-full text-sm font-black mb-6 inline-block uppercase tracking-widest shadow-sm">給六年級的超強筆記</span>
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight font-heading">
+                探索未來的超能力！<br/>
+                <span class="text-secondary">科技</span> × <span class="text-primary">職業</span> × <span class="text-accent">環保</span>
+            </h1>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8 font-medium opacity-90 leading-relaxed">
+                想知道開飛機需要什麼條件？電腦是怎麼聽懂指令的？北極熊的家為什麼融化？還有超酷的「產品經理」都在做什麼？一起來探險吧！
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#resources" class="bg-secondary hover:bg-teal-400 text-white font-black py-3 px-8 rounded-full shadow-lg transition-all transform hover:scale-105">開始探索</a>
+                <a href="#quiz" class="bg-white hover:bg-gray-100 text-dark font-black py-3 px-8 rounded-full shadow-lg transition-all transform hover:scale-105">挑戰題庫 🎮</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
+
+        <!-- 搜尋狀態 -->
+        <div id="searchStatus" class="hidden text-center text-xl font-bold text-dark bg-accent/30 py-4 rounded-2xl border-2 border-accent">
+            正在尋找關於「<span id="searchKeyword" class="text-primary"></span>」的寶藏...
+        </div>
+
+        <!-- 資源寶庫 -->
+        <section id="resources" class="scroll-mt-24">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-black font-heading text-dark inline-block relative">
+                    📚 資源寶庫
+                    <div class="absolute -bottom-3 left-0 w-full h-2 bg-secondary/30 rounded-full"></div>
+                </h2>
+                <p class="mt-4 text-gray-600 font-bold">來自大學教授與業界高手的知識，幫你變成聰明小天才！</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6" id="resourceContainer">
+                <!-- 資源卡片會由 JavaScript 載入 -->
+            </div>
+        </section>
+
+        <!-- 快問快答 FAQ -->
+        <section id="faq" class="scroll-mt-24 bg-white p-6 md:p-10 rounded-3xl shadow-xl border-4 border-gray-100 relative overflow-hidden">
+            <!-- 裝飾 -->
+            <div class="absolute -right-10 -top-10 bg-accent/20 w-32 h-32 rounded-full blur-2xl"></div>
+            
+            <div class="text-center mb-10 relative z-10">
+                <h2 class="text-3xl md:text-4xl font-black font-heading text-dark inline-block relative">
+                    ❓ 萬事通快問快答
+                    <div class="absolute -bottom-3 left-0 w-full h-2 bg-primary/30 rounded-full"></div>
+                </h2>
+            </div>
+            
+            <div class="space-y-4 relative z-10 max-w-4xl mx-auto" id="faqContainer">
+                <!-- FAQ會由 JavaScript 載入 -->
+            </div>
+        </section>
+
+        <!-- 遊戲化題庫 -->
+        <section id="quiz" class="scroll-mt-24">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-black font-heading text-dark inline-block relative">
+                    🎮 知識過關大挑戰
+                    <div class="absolute -bottom-3 left-0 w-full h-2 bg-accent/50 rounded-full"></div>
+                </h2>
+                <p class="mt-4 text-gray-600 font-bold">考驗你剛剛學到了多少，滿分可以獲得超強稱號喔！</p>
+            </div>
+
+            <div class="bg-dark text-white rounded-3xl p-6 md:p-12 max-w-3xl mx-auto shadow-2xl relative">
+                
+                <div id="quizApp">
+                    <!-- 開始畫面 -->
+                    <div id="quizStartScreen" class="text-center py-8">
+                        <i class="fa-solid fa-trophy text-6xl text-accent mb-6"></i>
+                        <h3 class="text-2xl md:text-3xl font-black mb-4">準備好接受挑戰了嗎？</h3>
+                        <p class="text-gray-300 mb-8 font-bold text-lg">共有 4 道關卡，融合了程式、環保與未來職業！</p>
+                        <button onclick="startQuiz()" class="bg-accent hover:bg-yellow-400 text-dark font-black text-xl py-4 px-12 rounded-full shadow-lg transition-all transform hover:scale-105">
+                            馬上開始！ <i class="fa-solid fa-gamepad ml-2"></i>
+                        </button>
+                    </div>
+
+                    <!-- 答題畫面 -->
+                    <div id="quizQuestionScreen" class="hidden">
+                        <div class="flex justify-between items-center mb-6 font-bold text-lg">
+                            <span class="bg-white/20 px-4 py-1 rounded-full text-accent" id="questionProgress">關卡 1 / 4</span>
+                            <span class="text-secondary" id="scoreDisplay">分數: 0</span>
+                        </div>
+                        
+                        <h3 class="text-2xl font-black mb-6 leading-relaxed" id="questionText">問題文字</h3>
+                        
+                        <div class="space-y-3" id="optionsContainer">
+                            <!-- 選項按鈕由 JS 生成 -->
+                        </div>
+                        
+                        <div id="feedbackBox" class="mt-6 p-4 rounded-xl hidden font-bold text-lg"></div>
+                        
+                        <button id="nextBtn" onclick="nextQuestion()" class="mt-6 w-full bg-secondary hover:bg-teal-400 text-white font-black text-xl py-4 rounded-xl hidden transition-all">下一關</button>
+                    </div>
+
+                    <!-- 結果畫面 -->
+                    <div id="quizResultScreen" class="hidden text-center py-8">
+                        <div class="text-7xl mb-4" id="resultIcon">🎉</div>
+                        <h3 class="text-3xl font-black mb-2 text-accent">挑戰結束！</h3>
+                        <p class="text-xl mb-6 font-bold">你的探險總分是： <span id="finalScore" class="text-4xl text-white font-black mx-2"></span> 分</p>
+                        <div id="resultMessage" class="font-bold text-lg bg-white/10 p-6 rounded-2xl mb-8"></div>
+                        
+                        <button onclick="resetQuiz()" class="bg-primary hover:bg-red-500 text-white font-black py-3 px-8 rounded-full transition-all transform hover:scale-105">
+                            <i class="fa-solid fa-rotate-right mr-2"></i> 再玩一次
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-gray-200 text-dark py-8 mt-12 text-center border-t-4 border-gray-300">
+        <div class="max-w-6xl mx-auto px-4">
+            <p class="font-bold mb-2">本網站內容來自台科大呂志豪老師與眾多大哥哥大姊姊的知識分享！</p>
+            <p class="text-sm text-gray-500 font-bold">專為六年級設計的知識探險 © 2026</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 邏輯 -->
+    <script>
+        // === 知識庫資料 (Data) ===
+
+        const resourcesData = [
+            {
+                id: 1,
+                title: "程式魔法師：認識 Python 迴圈",
+                category: "科技與程式",
+                icon: "fa-laptop-code",
+                color: "text-blue-500",
+                bg: "bg-blue-100",
+                desc: "覺得重複做同一件事很無聊嗎？大學教授教我們，在 Python 裡面可以用「For 迴圈」或「While 迴圈」讓電腦幫你自動重複做幾百次！還有「If/Else」可以讓電腦自己做決定喔！",
+                tags: ["Python", "迴圈", "If-Else"]
+            },
+            {
+                id: 2,
+                title: "地球守護者：什麼是碳盤查？",
+                category: "環保與地球",
+                icon: "fa-earth-americas",
+                color: "text-green-500",
+                bg: "bg-green-100",
+                desc: "北極熊的冰山快融化了！因為工廠和汽車排出了太多「溫室氣體」（像二氧化碳）。「碳盤查」就像是幫公司量體重，算出排了多少碳，才能朝「2050 淨零碳排」努力保護地球！",
+                tags: ["碳盤查", "溫室效應", "淨零碳排"]
+            },
+            {
+                id: 3,
+                title: "天空冒險家：如何成為開飛機的機師？",
+                category: "職業探索",
+                icon: "fa-plane-departure",
+                color: "text-indigo-500",
+                bg: "bg-indigo-100",
+                desc: "想在長榮或星宇航空開大飛機嗎？大哥哥分享，除了英文（多益）要很好之外，國中和高中的數學、物理基礎也非常重要！面試時還要展現你不放棄的決心與熱情喔！",
+                tags: ["機師", "航空業", "英文物理"]
+            },
+            {
+                id: 4,
+                title: "商業小大亨：行銷與解決問題",
+                category: "商業與管理",
+                icon: "fa-store",
+                color: "text-orange-500",
+                bg: "bg-orange-100",
+                desc: "很多人以為「行銷」就是騙人買東西，其實錯囉！專家說，厲害的行銷是「解決別人的問題」，幫別人創造價值。而且在職場上，學會「像老闆一樣思考」和「持續學習」才是最厲害的！",
+                tags: ["行銷", "解決問題", "產品經理"]
+            }
+        ];
+
+        const faqsData = [
+            {
+                id: 1,
+                question: "什麼是「碳盤查」？跟北極熊有什麼關係？",
+                answer: "我們平常開車、吹冷氣、工廠運作都會製造「溫室氣體」（像是二氧化碳），這會讓地球變熱、北極冰山融化，北極熊就沒有家了😢。「碳盤查」就像是幫地球量體重，精算我們到底製造了多少這些氣體，這樣大公司才知道要怎麼減少排放，一起保護地球！"
+            },
+            {
+                id: 2,
+                question: "寫程式常常遇到錯誤（Bug）怎麼辦？電腦壞了嗎？",
+                answer: "別緊張！電腦沒有壞喔。大學的教授說，寫程式遇到「Error（錯誤）」是非常正常的事情！這時候不用害怕，工程師最厲害的超能力就是「把錯誤訊息丟到 Google 搜尋」。只要慢慢找答案、修正它，你的程式魔法就會越來越強！"
+            },
+            {
+                id: 3,
+                question: "如果我長大想當機師（開飛機），我現在可以準備什麼？",
+                answer: "除了要有好的身體之外，飛機上的儀表板都是英文的，所以「英文能力」超級重要！另外，因為飛機在天上飛需要計算速度和氣流，所以上了國中、高中之後，「數學」和「物理」這兩科一定要好好學喔！✈️"
+            },
+            {
+                id: 4,
+                question: "「行銷」是不是就在電視上打廣告，騙我們花錢？",
+                answer: "才不是呢！顧問大師說，真正的行銷是「幫助大家解決困難」。例如：發明一種不會讓牙齒痛的健康糖果，讓愛吃糖的小朋友很開心。只為了騙人花錢的那叫做詐騙，真正的行銷是要創造價值，讓買的人覺得很值得！"
+            }
+        ];
+
+        const quizData = [
+            {
+                q: "在 Python 程式魔法中，如果你想讓電腦「判斷」事情（例如：如果分數及格就給蘋果，不及格就給香蕉），要用哪一個指令？",
+                options: ["For 迴圈 (重複做)", "If / Else (如果...否則...)", "Anaconda (大蟒蛇)"],
+                correct: 1,
+                explanation: "答對囉！If/Else 就像是給電腦的岔路指標，讓電腦根據條件自己做決定！"
+            },
+            {
+                q: "企鵝和北極熊的家快融化了，是因為哪一種氣體太多，造成地球越來越熱的「溫室效應」？",
+                options: ["氧氣", "二氧化碳", "氮氣"],
+                correct: 1,
+                explanation: "沒錯！二氧化碳是最主要的溫室氣體之一，所以我們才需要做「碳盤查」和「淨零碳排」來減少它！"
+            },
+            {
+                q: "如果你想成為長榮或星宇航空的「培訓機師」，除了英文要很好，哪兩個科目也很重要？",
+                options: ["歷史與地理", "音樂與美術", "數學與物理"],
+                correct: 2,
+                explanation: "正確！開飛機需要計算航線、速度和氣流，所以數學和物理的基礎超級無敵重要喔！"
+            },
+            {
+                q: "顧問大師分享了在工作上變厲害的秘訣，他認為真正的「行銷」是什麼？",
+                options: ["用騙人的方式賣東西", "幫助別人解決問題，創造有用的東西", "只要一直花錢打廣告就好"],
+                correct: 1,
+                explanation: "太棒了！真正的行銷是為了創造價值、解決顧客的困難，而不是騙人喔！"
+            }
+        ];
+
+        // === DOM 元素 ===
+        const resourceContainer = document.getElementById('resourceContainer');
+        const faqContainer = document.getElementById('faqContainer');
+        const searchInput = document.getElementById('searchInput');
+        const searchIcon = document.getElementById('searchIcon');
+        const searchStatus = document.getElementById('searchStatus');
+        const searchKeyword = document.getElementById('searchKeyword');
+
+        // === 渲染畫面 ===
+
+        function renderResources(data) {
+            resourceContainer.innerHTML = '';
+            if (data.length === 0) {
+                resourceContainer.innerHTML = '<p class="col-span-full text-center text-gray-500 font-bold text-xl py-8">糟糕！找不到相關的寶藏 😢 換個詞搜看看？</p>';
+                return;
+            }
+            data.forEach(item => {
+                const tagsHtml = item.tags.map(tag => `<span class="bg-white text-dark border-2 border-gray-200 text-xs px-3 py-1 rounded-full font-bold shadow-sm">${tag}</span>`).join('');
+                const card = `
+                    <div class="card-bg rounded-3xl p-6 md:p-8 border-2 border-gray-100 bounce-hover transition-all cursor-pointer group">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="${item.bg} w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 shadow-sm group-hover:rotate-12 transition-all">
+                                <i class="fa-solid ${item.icon} text-3xl ${item.color}"></i>
+                            </div>
+                            <div>
+                                <span class="text-sm font-bold text-gray-500">${item.category}</span>
+                                <h3 class="text-xl md:text-2xl font-black text-dark leading-tight mt-1">${item.title}</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-6 font-bold leading-relaxed text-base">${item.desc}</p>
+                        <div class="flex flex-wrap gap-2 pt-4 border-t-2 border-gray-100/50">
+                            ${tagsHtml}
+                        </div>
+                    </div>
+                `;
+                resourceContainer.innerHTML += card;
+            });
+        }
+
+        function renderFAQs(data) {
+            faqContainer.innerHTML = '';
+            if (data.length === 0) {
+                faqContainer.innerHTML = '<p class="text-center text-gray-500 font-bold text-xl py-8">沒有找到相關的問題喔 😢</p>';
+                return;
+            }
+            data.forEach((faq) => {
+                const faqItem = `
+                    <div class="border-2 border-gray-200 rounded-2xl overflow-hidden transition-all hover:border-secondary hover:shadow-md bg-gray-50">
+                        <button class="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none" onclick="toggleFaq(${faq.id})">
+                            <span class="font-black text-xl text-dark pr-4 flex items-center gap-3">
+                                <span class="bg-accent w-8 h-8 rounded-full flex items-center justify-center text-dark text-sm shrink-0">Q</span>
+                                ${faq.question}
+                            </span>
+                            <i class="fa-solid fa-chevron-down text-gray-400 transition-all text-xl" id="faq-icon-${faq.id}"></i>
+                        </button>
+                        <div class="px-6 pb-6 hidden" id="faq-answer-${faq.id}">
+                            <div class="p-5 bg-white rounded-xl border-2 border-gray-100 font-bold text-gray-700 leading-relaxed text-lg flex items-start gap-3">
+                                <span class="bg-secondary w-8 h-8 rounded-full flex items-center justify-center text-white text-sm shrink-0 mt-1">A</span>
+                                <div>${faq.answer}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                faqContainer.innerHTML += faqItem;
+            });
+        }
+
+        function toggleFaq(id) {
+            const answer = document.getElementById(`faq-answer-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.classList.add('rotate-180', 'text-secondary');
+            } else {
+                answer.classList.add('hidden');
+                icon.classList.remove('rotate-180', 'text-secondary');
+            }
+        }
+
+        // === 搜尋邏輯 ===
+
+        function handleSearch(e) {
+            const query = e.target.value.toLowerCase().trim();
+            
+            if (query === '') {
+                searchStatus.classList.add('hidden');
+                searchIcon.classList.remove('fa-times', 'text-accent', 'cursor-pointer');
+                searchIcon.classList.add('fa-search', 'text-white/80');
+                searchIcon.onclick = null;
+                renderResources(resourcesData);
+                renderFAQs(faqsData);
+                return;
+            }
+
+            // 變成清除按鈕
+            searchIcon.classList.remove('fa-search', 'text-white/80');
+            searchIcon.classList.add('fa-times', 'text-accent', 'cursor-pointer', 'hover:text-yellow-300');
+            searchIcon.onclick = () => {
+                searchInput.value = '';
+                handleSearch({target: {value: ''}});
+            };
+
+            // 顯示狀態
+            searchStatus.classList.remove('hidden');
+            searchKeyword.innerText = query;
+
+            // 過濾資源
+            const filteredResources = resourcesData.filter(item => 
+                item.title.toLowerCase().includes(query) || 
+                item.desc.toLowerCase().includes(query) ||
+                item.tags.some(tag => tag.toLowerCase().includes(query)) ||
+                item.category.toLowerCase().includes(query)
+            );
+            renderResources(filteredResources);
+
+            // 過濾 FAQ
+            const filteredFAQs = faqsData.filter(item => 
+                item.question.toLowerCase().includes(query) || 
+                item.answer.toLowerCase().includes(query)
+            );
+            renderFAQs(filteredFAQs);
+            
+            // 自動展開搜到的 FAQ
+            filteredFAQs.forEach(faq => {
+                setTimeout(() => {
+                    const answer = document.getElementById(`faq-answer-${faq.id}`);
+                    const icon = document.getElementById(`faq-icon-${faq.id}`);
+                    if(answer) {
+                        answer.classList.remove('hidden');
+                        icon.classList.add('rotate-180', 'text-secondary');
+                    }
+                }, 50);
+            });
+        }
+
+        searchInput.addEventListener('input', handleSearch);
+
+        // === 遊戲化題庫邏輯 ===
+
+        let currentQuestion = 0;
+        let score = 0;
+        let quizActive = false;
+
+        const screens = {
+            start: document.getElementById('quizStartScreen'),
+            question: document.getElementById('quizQuestionScreen'),
+            result: document.getElementById('quizResultScreen')
+        };
+
+        const els = {
+            qText: document.getElementById('questionText'),
+            options: document.getElementById('optionsContainer'),
+            progress: document.getElementById('questionProgress'),
+            score: document.getElementById('scoreDisplay'),
+            feedback: document.getElementById('feedbackBox'),
+            nextBtn: document.getElementById('nextBtn'),
+            finalScore: document.getElementById('finalScore'),
+            resultMsg: document.getElementById('resultMessage'),
+            resultIcon: document.getElementById('resultIcon')
+        };
+
+        function showScreen(screenName) {
+            Object.values(screens).forEach(s => s.classList.add('hidden'));
+            screens[screenName].classList.remove('hidden');
+        }
+
+        function startQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            quizActive = true;
+            loadQuestion();
+            showScreen('question');
+        }
+
+        function loadQuestion() {
+            const q = quizData[currentQuestion];
+            els.progress.innerText = `關卡 ${currentQuestion + 1} / ${quizData.length}`;
+            els.score.innerText = `分數: ${score}`;
+            els.qText.innerText = q.q;
+            els.feedback.classList.add('hidden');
+            els.nextBtn.classList.add('hidden');
+            
+            els.options.innerHTML = '';
+            q.options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'w-full text-left p-5 rounded-2xl border-4 border-gray-600 bg-gray-800 hover:border-accent hover:bg-gray-700 font-bold text-lg transition-all text-white option-btn flex items-center gap-4';
+                btn.innerHTML = `<span class="bg-gray-600 text-white w-8 h-8 rounded-full flex items-center justify-center shrink-0">${String.fromCharCode(65+index)}</span> <span>${opt}</span>`;
+                btn.onclick = () => selectOption(index, btn);
+                els.options.appendChild(btn);
+            });
+        }
+
+        function selectOption(selectedIndex, btnElement) {
+            if(!quizActive) return;
+            quizActive = false; // 鎖定
+            
+            const q = quizData[currentQuestion];
+            const isCorrect = (selectedIndex === q.correct);
+            
+            // 處理按鈕樣式
+            const allBtns = document.querySelectorAll('.option-btn');
+            allBtns.forEach((b, idx) => {
+                b.onclick = null;
+                b.classList.remove('hover:border-accent', 'hover:bg-gray-700');
+                if (idx === q.correct) {
+                    b.classList.remove('border-gray-600', 'bg-gray-800');
+                    b.classList.add('border-green-400', 'bg-green-900/50');
+                } else if (idx === selectedIndex && !isCorrect) {
+                    b.classList.remove('border-gray-600', 'bg-gray-800');
+                    b.classList.add('border-red-400', 'bg-red-900/50');
+                }
+            });
+
+            // 顯示回饋
+            els.feedback.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');
+            
+            if (isCorrect) {
+                score += (100 / quizData.length);
+                els.score.innerText = `分數: ${score}`;
+                els.feedback.classList.add('bg-green-100', 'text-green-800');
+                els.feedback.innerHTML = `<div class="flex items-center gap-2 mb-1"><i class="fa-solid fa-star text-yellow-500 text-xl"></i><span class="font-black text-xl">答對了！太神啦！</span></div><span>${q.explanation}</span>`;
+            } else {
+                els.feedback.classList.add('bg-red-100', 'text-red-800');
+                els.feedback.innerHTML = `<div class="flex items-center gap-2 mb-1"><i class="fa-solid fa-bomb text-red-500 text-xl"></i><span class="font-black text-xl">哎呀！差一點點！</span></div><span>${q.explanation}</span>`;
+            }
+
+            // 顯示下一步
+            if (currentQuestion < quizData.length - 1) {
+                els.nextBtn.innerText = "前往下一關 🚀";
+            } else {
+                els.nextBtn.innerText = "查看探險結果 🏆";
+            }
+            els.nextBtn.classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < quizData.length) {
+                quizActive = true;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            showScreen('result');
+            els.finalScore.innerText = score;
+            
+            if (score === 100) {
+                els.resultIcon.innerHTML = '<i class="fa-solid fa-crown text-accent animate-bounce"></i>';
+                els.resultMsg.innerHTML = "你是<b>「超時空天才探險家」</b>！未來的科技和工作都難不倒你，實在太厲害了！🌟";
+            } else if (score >= 50) {
+                els.resultIcon.innerHTML = '<i class="fa-solid fa-thumbs-up text-secondary animate-bounce"></i>';
+                els.resultMsg.innerHTML = "你是<b>「潛力小達人」</b>！已經懂了很多知識，再複習一下上面的寶庫，下次一定拿滿分！💪";
+            } else {
+                els.resultIcon.innerHTML = '<i class="fa-solid fa-book-open text-primary animate-bounce"></i>';
+                els.resultMsg.innerHTML = "你是<b>「新手冒險家」</b>！沒關係，知識就是力量，趕快上去「資源寶庫」和「快問快答」練練功吧！📚";
+            }
+        }
+
+        function resetQuiz() {
+            startQuiz();
+        }
+
+        // === 初始載入 ===
+        window.onload = () => {
+            renderResources(resourcesData);
+            renderFAQs(faqsData);
+        };
+
+    </script>
+</body>
+</html>
